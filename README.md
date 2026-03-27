@@ -1,13 +1,13 @@
 # Générateur de Parties
 
-Ce dépôt contient une version publique et simplifiée d'un simulateur de partage de gâteau.
+Ce dépôt contient une version publique et simplifiée du simulateur de partage de gâteau.
 
 L'idée générale est la suivante :
 
 - un gâteau est représenté par une suite de goûts ;
-- chaque joueur associe un score à chaque goût ;
+- chaque joueur a un score associé à chaque goût ;
 - au fil de la partie, les joueurs accumulent un score temporaire ;
-- certains joueurs peuvent décider de dire `STOP` pour conserver la part en cours.
+- les joueurs peuvent décider de dire `STOP` pour conserver la part en cours.
 
 Cette version a surtout un objectif pédagogique : elle permet de lire le code, de comprendre le modèle et de lancer une simulation simple sans dépendances externes.
 
@@ -16,7 +16,7 @@ Cette version a surtout un objectif pédagogique : elle permet de lire le code, 
 Le script `generateurParties.public.v1.0.py` permet de :
 
 - générer un gâteau aléatoire ;
-- générer les goûts de plusieurs joueurs ;
+- générer aléatoirement les goûts des joueurs ;
 - simuler une partie avec une stratégie commune ;
 - afficher les étapes de la partie dans le terminal ;
 - mesurer deux indicateurs simples en fin de partie.
@@ -83,7 +83,7 @@ Chaque joueur possède :
 La simulation suit ce principe :
 
 1. on génère un gâteau ;
-2. on génère les goûts des joueurs ;
+2. on génère les joueurs et leurs goûts ;
 3. on parcourt le gâteau part par part ;
 4. à chaque étape, les joueurs encore en jeu mettent à jour leur score temporaire ;
 5. selon la stratégie, certains peuvent dire `STOP` ;
@@ -92,14 +92,12 @@ La simulation suit ce principe :
 
 ## Paramètres principaux
 
-Au début du fichier [generateurParties.public.v1.0.py](f:/Code Math en JEANS/generateurParties.public.v1.0.py), plusieurs paramètres peuvent être modifiés :
+Au début du fichier generateurParties.public.v1.0.py, plusieurs paramètres peuvent être modifiés :
 
 - `gouts` : la liste des goûts disponibles ;
 - `longueur` : la longueur du gâteau ;
 - `nbJoueur` : le nombre de joueurs ;
 - `rangeScore` : l'intervalle des scores attribués aux goûts.
-
-Ces paramètres suffisent déjà pour produire des simulations variées.
 
 ## Fonctions importantes
 
@@ -112,7 +110,7 @@ Voici les fonctions les plus utiles à connaître :
 - `strategies(...)` : décide si un joueur doit dire `STOP` ;
 - `partie(...)` : exécute une simulation complète.
 
-Les autres fonctions servent surtout à l'affichage dans le terminal.
+Les autres fonctions servent à l'affichage dans le terminal.
 
 ## Ce qui est simplifié dans cette version
 
@@ -130,7 +128,6 @@ Quelques points sont à garder en tête :
 
 - l'affichage utilise des couleurs ANSI, ce qui dépend du terminal ;
 - les noms de variables et de fonctions sont en français ;
-- le script est écrit comme un fichier de simulation, pas comme une bibliothèque Python empaquetée ;
 - cette version privilégie la lisibilité à la généralisation.
 
 ## Pour aller plus loin
@@ -152,4 +149,4 @@ Ce projet est une bonne porte d'entrée si tu veux :
 - montrer le projet à quelqu'un d'autre ;
 - expérimenter ensuite tes propres variantes du modèle.
 
-> Le README a été rédigé par Codex 😁, le reste du code est 100% fait main par notre groupe. Passez une bonne journée
+> Le README a été rédigé par Codex et relu par notre groupe 😁, le reste du code est 100% fait main par notre groupe. Passez une bonne journée
