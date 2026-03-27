@@ -1,100 +1,172 @@
-# Générateur de Parties
+# Générateur de Parties - Version publique
 
-Ce projet contient une version publique et simplifiée d'un simulateur de partage de gâteau.  
-Le script principal, `generateurParties.public.v1.0.py`, génère un gâteau aléatoire, crée des profils de joueurs, puis simule leurs décisions de dire `STOP` selon une stratégie commune.
+Ce dépôt contient une version publique et simplifiée d'un simulateur de partage de gâteau.
 
-## Idée du modèle
+L'idée générale est la suivante :
 
-Le gâteau est représenté par une liste de goûts, par exemple `["V", "F", "C", "N"]`.
+- un gâteau est représenté par une suite de goûts ;
+- chaque joueur associe un score à chaque goût ;
+- au fil de la partie, les joueurs accumulent un score temporaire ;
+- certains joueurs peuvent décider de dire `STOP` pour conserver la part en cours.
 
-Chaque joueur reçoit :
+Cette version publique a surtout un objectif pédagogique : elle permet de lire le code, de comprendre le modèle et de lancer une simulation simple sans dépendances externes.
 
-- un dictionnaire de scores associé aux goûts ;
-- un `scoreMax`, c'est-à-dire le meilleur score théorique qu'il pourrait atteindre ;
-- un `scoreCible`, utilisé par la stratégie pour décider quand s'arrêter.
+## Contenu du dépôt
 
-Pendant la partie :
+Le dépôt contient principalement deux scripts :
 
-- on parcourt le gâteau part par part ;
-- chaque joueur encore en jeu cumule le score de la part courante ;
-- certains joueurs peuvent dire `STOP` ;
-- si plusieurs joueurs disent `STOP` en même temps, un seul est choisi aléatoirement.
+- `generateurParties.public.v1.0.py` : la version publique, plus lisible et plus simple ;
+- `generateurParties.v6.0.py` : une version plus complète ou plus expérimentale, avec davantage d'outils d'étude.
 
-En fin de simulation, le programme renvoie :
+Si tu veux découvrir le projet, commence par `generateurParties.public.v1.0.py`.
+
+## À quoi sert la version publique
+
+La version publique permet de :
+
+- générer un gâteau aléatoire ;
+- générer les goûts de plusieurs joueurs ;
+- simuler une partie avec une stratégie commune ;
+- afficher les étapes de la partie dans le terminal ;
+- mesurer deux indicateurs simples en fin de partie.
+
+Les deux valeurs renvoyées à la fin d'une simulation sont :
 
 - le ratio moyen `score / scoreMax` ;
-- la proportion moyenne de joueurs ayant atteint une part jugée équitable.
+- la proportion de joueurs ayant atteint une part jugée équitable.
 
-## Installation rapide
+## Installation
 
-Si tu veux utiliser la version complète `generateurParties.v6.0.py`, installe directement les dépendances avec :
+### Version publique
 
-```bash
-python -m pip install numpy matplotlib
-```
-
-Pour la version publique `generateurParties.public.v1.0.py`, aucune bibliothèque externe n'est nécessaire : Python seul suffit.
-
-## Lancer le script
+La version publique ne dépend d'aucune bibliothèque externe.
 
 Prérequis :
 
 - Python 3.10 ou plus récent.
 
-Depuis le dossier du projet :
+### Version complète
+
+Si tu veux utiliser aussi `generateurParties.v6.0.py`, installe les dépendances avec :
+
+```bash
+python -m pip install numpy matplotlib
+```
+
+## Lancement rapide
+
+Depuis le dossier du projet, lance :
 
 ```bash
 python generateurParties.public.v1.0.py
 ```
 
-Le script propose deux modes :
+Le script affiche ensuite :
 
-- `P` : affiche une partie détaillée étape par étape ;
-- `E` : lance plusieurs simulations et affiche des moyennes globales.
+```text
+Partie / Etude
+(P/E) :
+```
+
+Dans la version publique :
+
+- `P` lance une partie affichée étape par étape ;
+- `E` correspond à une partie laissée très simple dans cette version.
+
+## Comment fonctionne le modèle
+
+### 1. Le gâteau
+
+Le gâteau est une liste de goûts, par exemple :
+
+```python
+['V', 'V', 'C', 'N', 'F']
+```
+
+Chaque lettre représente un goût.  
+La variable `gouts` définit les goûts disponibles, et `longueur` définit la taille du gâteau.
+
+### 2. Les joueurs
+
+Chaque joueur possède :
+
+- un identifiant ;
+- un dictionnaire `gouts` associant un score à chaque goût ;
+- un `scoreMax`, c'est-à-dire le meilleur score théorique qu'il pourrait atteindre ;
+- un `scoreCible`, utilisé par la stratégie ;
+- un `scorePartActuelle`, qui suit la valeur de la part en cours ;
+- un booléen `stop`, qui indique si le joueur s'est déjà arrêté.
+
+### 3. La partie
+
+La simulation suit ce principe :
+
+1. on génère un gâteau ;
+2. on génère les goûts des joueurs ;
+3. on parcourt le gâteau part par part ;
+4. à chaque étape, les joueurs encore en jeu mettent à jour leur score temporaire ;
+5. selon la stratégie, certains peuvent dire `STOP` ;
+6. si plusieurs joueurs disent `STOP`, un seul est choisi aléatoirement ;
+7. la partie continue jusqu'à la fin du gâteau.
 
 ## Paramètres principaux
 
-Au début du fichier, plusieurs variables globales peuvent être modifiées :
+Au début du fichier `generateurParties.public.v1.0.py`, plusieurs paramètres peuvent être modifiés :
 
-- `gouts` : liste des goûts utilisés dans le gâteau ;
-- `longueur` : nombre de parts du gâteau ;
-- `nbJoueur` : nombre de joueurs ;
-- `rangeScore` : borne minimale et borne maximale des scores attribués aux goûts.
+- `gouts` : la liste des goûts disponibles ;
+- `longueur` : la longueur du gâteau ;
+- `nbJoueur` : le nombre de joueurs ;
+- `rangeScore` : l'intervalle des scores attribués aux goûts.
+
+Ces paramètres suffisent déjà pour produire des simulations variées.
 
 ## Fonctions importantes
 
-Quelques fonctions structurent le script :
+Voici les fonctions les plus utiles à connaître dans la version publique :
 
 - `genererGateau(...)` : construit un gâteau aléatoire ;
-- `genererGouts(...)` : attribue des scores aux goûts pour un joueur ;
-- `calculScoreMax(...)` : calcule le meilleur score théorique possible ;
+- `genererGouts(...)` : attribue un score à chaque goût pour un joueur ;
+- `calculScoreMax(...)` : calcule le meilleur score théorique atteignable ;
+- `stopPartRestanteNegative(...)` : teste si la suite restante peut encore améliorer un score ;
 - `strategies(...)` : décide si un joueur doit dire `STOP` ;
-- `partie(...)` : lance une simulation complète ;
-- `etudier_parties(...)` : répète plusieurs simulations pour obtenir des moyennes.
+- `partie(...)` : exécute une simulation complète.
 
-## Ce que j'ai corrigé dans cette version
+Les autres fonctions servent surtout à l'affichage dans le terminal.
 
-Le fichier public contenait quelques points fragiles ou inachevés. Cette version corrige notamment :
+## Ce qui est simplifié dans la version publique
 
-- une erreur de syntaxe au début du fichier ;
-- une simplification incomplète du gâteau dans `simplifieGateau` ;
-- une logique de vérification du "reste du gâteau" pour le dernier joueur ;
-- plusieurs cas limites sur les scores et les ratios ;
-- l'ancien mode `E`, qui ne faisait presque rien dans la version publique.
+Cette version a été pensée pour être montrable et compréhensible plus facilement.  
+Elle simplifie donc plusieurs aspects :
 
-J'ai aussi nettoyé les commentaires et docstrings pour qu'ils soient plus homogènes et plus lisibles.
+- tous les joueurs utilisent la même stratégie ;
+- l'affichage est très présent pour aider à suivre la simulation ;
+- la partie "étude" est volontairement réduite ;
+- certaines idées plus avancées de la version complète ne sont pas détaillées ici.
 
-## Conseils pour aller plus loin
+## Limites connues
 
-Si tu veux continuer à faire évoluer le projet, voici les améliorations les plus utiles :
+Quelques points sont à garder en tête :
 
-- ajouter des tests unitaires pour `calculScoreMax`, `genererGouts` et `partie` ;
-- séparer la logique métier de l'affichage terminal ;
-- ajouter plusieurs stratégies de joueurs et pouvoir les comparer ;
-- permettre de fixer une graine aléatoire pour reproduire exactement une simulation ;
-- exporter les résultats d'étude dans un fichier CSV pour faire des graphiques ensuite.
+- l'affichage utilise des couleurs ANSI, ce qui dépend du terminal ;
+- les noms de variables et de fonctions sont en français ;
+- le script est écrit comme un fichier de simulation, pas comme une bibliothèque Python empaquetée ;
+- la version publique privilégie la lisibilité à la généralisation.
 
-## Remarque
+## Pour aller plus loin
 
-Le fichier `generateurParties.v6.0.py` semble être une version plus complète ou expérimentale du projet.  
-Le fichier public est plus simple, plus lisible, et mieux adapté à une relecture ou à une présentation.
+Si tu veux faire évoluer le projet, les pistes les plus naturelles sont :
+
+- ajouter plusieurs stratégies de joueurs ;
+- séparer encore plus la logique métier de l'affichage ;
+- ajouter des tests unitaires ;
+- exporter les résultats des simulations ;
+- comparer plusieurs nombres de joueurs et plusieurs plages de scores.
+
+## Résumé
+
+La version publique est la bonne porte d'entrée si tu veux :
+
+- comprendre rapidement le fonctionnement du modèle ;
+- lire un script de simulation sans dépendances ;
+- montrer le projet à quelqu'un d'autre ;
+- préparer ensuite un travail plus poussé sur la version complète.
