@@ -1,4 +1,4 @@
-# Générateur de Parties - Version publique
+# Générateur de Parties
 
 Ce dépôt contient une version publique et simplifiée d'un simulateur de partage de gâteau.
 
@@ -9,20 +9,11 @@ L'idée générale est la suivante :
 - au fil de la partie, les joueurs accumulent un score temporaire ;
 - certains joueurs peuvent décider de dire `STOP` pour conserver la part en cours.
 
-Cette version publique a surtout un objectif pédagogique : elle permet de lire le code, de comprendre le modèle et de lancer une simulation simple sans dépendances externes.
+Cette version a surtout un objectif pédagogique : elle permet de lire le code, de comprendre le modèle et de lancer une simulation simple sans dépendances externes.
 
-## Contenu du dépôt
+## À quoi sert le script
 
-Le dépôt contient principalement deux scripts :
-
-- `generateurParties.public.v1.0.py` : la version publique, plus lisible et plus simple ;
-- `generateurParties.v6.0.py` : une version plus complète ou plus expérimentale, avec davantage d'outils d'étude.
-
-Si tu veux découvrir le projet, commence par `generateurParties.public.v1.0.py`.
-
-## À quoi sert la version publique
-
-La version publique permet de :
+Le script `generateurParties.public.v1.0.py` permet de :
 
 - générer un gâteau aléatoire ;
 - générer les goûts de plusieurs joueurs ;
@@ -37,21 +28,11 @@ Les deux valeurs renvoyées à la fin d'une simulation sont :
 
 ## Installation
 
-### Version publique
-
-La version publique ne dépend d'aucune bibliothèque externe.
+Le script ne dépend d'aucune bibliothèque externe.
 
 Prérequis :
 
 - Python 3.10 ou plus récent.
-
-### Version complète
-
-Si tu veux utiliser aussi `generateurParties.v6.0.py`, installe les dépendances avec :
-
-```bash
-python -m pip install numpy matplotlib
-```
 
 ## Lancement rapide
 
@@ -68,7 +49,7 @@ Partie / Etude
 (P/E) :
 ```
 
-Dans la version publique :
+Dans cette version :
 
 - `P` lance une partie affichée étape par étape ;
 - `E` correspond à une partie laissée très simple dans cette version.
@@ -111,7 +92,7 @@ La simulation suit ce principe :
 
 ## Paramètres principaux
 
-Au début du fichier `generateurParties.public.v1.0.py`, plusieurs paramètres peuvent être modifiés :
+Au début du fichier [generateurParties.public.v1.0.py](f:/Code Math en JEANS/generateurParties.public.v1.0.py), plusieurs paramètres peuvent être modifiés :
 
 - `gouts` : la liste des goûts disponibles ;
 - `longueur` : la longueur du gâteau ;
@@ -122,7 +103,7 @@ Ces paramètres suffisent déjà pour produire des simulations variées.
 
 ## Fonctions importantes
 
-Voici les fonctions les plus utiles à connaître dans la version publique :
+Voici les fonctions les plus utiles à connaître :
 
 - `genererGateau(...)` : construit un gâteau aléatoire ;
 - `genererGouts(...)` : attribue un score à chaque goût pour un joueur ;
@@ -133,7 +114,7 @@ Voici les fonctions les plus utiles à connaître dans la version publique :
 
 Les autres fonctions servent surtout à l'affichage dans le terminal.
 
-## Ce qui est simplifié dans la version publique
+## Ce qui est simplifié dans cette version
 
 Cette version a été pensée pour être montrable et compréhensible plus facilement.  
 Elle simplifie donc plusieurs aspects :
@@ -141,7 +122,7 @@ Elle simplifie donc plusieurs aspects :
 - tous les joueurs utilisent la même stratégie ;
 - l'affichage est très présent pour aider à suivre la simulation ;
 - la partie "étude" est volontairement réduite ;
-- certaines idées plus avancées de la version complète ne sont pas détaillées ici.
+- le script reste volontairement simple et centré sur la simulation de base.
 
 ## Limites connues
 
@@ -150,7 +131,7 @@ Quelques points sont à garder en tête :
 - l'affichage utilise des couleurs ANSI, ce qui dépend du terminal ;
 - les noms de variables et de fonctions sont en français ;
 - le script est écrit comme un fichier de simulation, pas comme une bibliothèque Python empaquetée ;
-- la version publique privilégie la lisibilité à la généralisation.
+- cette version privilégie la lisibilité à la généralisation.
 
 ## Pour aller plus loin
 
@@ -164,9 +145,11 @@ Si tu veux faire évoluer le projet, les pistes les plus naturelles sont :
 
 ## Résumé
 
-La version publique est la bonne porte d'entrée si tu veux :
+Ce projet est une bonne porte d'entrée si tu veux :
 
 - comprendre rapidement le fonctionnement du modèle ;
 - lire un script de simulation sans dépendances ;
 - montrer le projet à quelqu'un d'autre ;
-- préparer ensuite un travail plus poussé sur la version complète.
+- expérimenter ensuite tes propres variantes du modèle.
+
+README fait avec Codex :), le reste du code est 100% fait main
