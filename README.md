@@ -25,6 +25,16 @@ En fin de simulation, le programme renvoie :
 - le ratio moyen `score / scoreMax` ;
 - la proportion moyenne de joueurs ayant atteint une part jugée équitable.
 
+## Installation rapide
+
+Si tu veux utiliser la version complète `generateurParties.v6.0.py`, installe directement les dépendances avec :
+
+```bash
+python -m pip install numpy matplotlib
+```
+
+Pour la version publique `generateurParties.public.v1.0.py`, aucune bibliothèque externe n'est nécessaire : Python seul suffit.
+
 ## Lancer le script
 
 Prérequis :
