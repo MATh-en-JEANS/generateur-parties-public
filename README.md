@@ -152,4 +152,4 @@ Ce projet est une bonne porte d'entrée si tu veux :
 - montrer le projet à quelqu'un d'autre ;
 - expérimenter ensuite tes propres variantes du modèle.
 
-README fait avec Codex :), le reste du code est 100% fait main
+* Le README a été rédigé par Codex 😁, le reste du code est 100% fait main par notre groupe. Passez une bonne journée
